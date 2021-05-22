@@ -1,3 +1,4 @@
+import sys
 import pymysql
 import database.db_runner as runner
 
@@ -10,11 +11,21 @@ class Database:
         password = login.get_password()
         db = login.get_database()
 
-        global database_
-        database_ = pymysql.connect(host=host, user=user, password=password, database=db)
+        config = {
+            "host": host,
+            "user": user,
+            "password": password,
+            "database": db
+        }
 
+        global database
         global cursor
-        cursor = database_.cursor()
+
+        try:
+            database = pymysql.connect(**config)
+            cursor = database.cursor()
+        except pymysql.err.OperationalError:
+            sys.exit("[ERROR]: Fail to connect with the database!")
 
     def create_table_db(self):
         """Creates a new table in the database called "registry" if it doesn't exist"""
@@ -23,26 +34,26 @@ class Database:
             movie_code INT,
             client_name VARCHAR(50),
             client_id INT NOT NULL
-            );"""
+        );"""
 
         try:
             cursor.execute(command)
-            database_.commit()
+            database.commit()
         except:
-            database_.rollback()
+            database.rollback()
 
     def add_values_db(self, mt, mc, cn, ci):
         """Adds values ​​to the "registry" table in the database"""
         command = """INSERT INTO registry(movie_title, movie_code, client_name, client_id)
-            VALUES (%s, %s, %s, %s)"""
+        VALUES (%s, %s, %s, %s)"""
 
         val = (mt, mc, cn, ci)
 
         try:
             cursor.execute(command, val)
-            database_.commit()
+            database.commit()
         except:
-            database_.rollback()
+            database.rollback()
 
     def modify_values_db(self, mt, mc, ci):
         """Modifys the values ​​of the "registry" table in the database"""
@@ -55,9 +66,9 @@ class Database:
             val = (mc, ci)
             cursor.execute(command, val)
 
-            database_.commit()
+            database.commit()
         except:
-            database_.rollback()
+            database.rollback()
 
     def delete_values_db(self, ci):
         """Deletes values from the "registry" table in the database"""
@@ -66,9 +77,9 @@ class Database:
             val = ci
 
             cursor.execute(command, val)
-            database_.commit()
+            database.commit()
         except:
-            database_.rollback()
+            database.rollback()
 
     def drop_table_db(self):
         """Deletes the "registry" table from the database
@@ -76,9 +87,9 @@ class Database:
         try:
             command = "DROP TABLE IF EXISTS registry"
             cursor.execute(command)
-            database_.commit()
+            database.commit()
         except:
-            database_.rollback()
+            database.rollback()
 
     def show_table_db(self):
         """Shows values of the "registry" table from the database"""
@@ -94,4 +105,4 @@ class Database:
 
     def close_db(self):
         cursor.close()
-        database_.close()
+        database.close()
