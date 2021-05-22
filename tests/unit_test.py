@@ -5,8 +5,6 @@ sys.path.insert(1, "..")
 
 from database.database import Database
 
-# Output: (('Filme1', 4444, 'Paula', 1919),)
-
 class TestSystem(unittest.TestCase):
     def setUp(self):
         self.db = Database()
