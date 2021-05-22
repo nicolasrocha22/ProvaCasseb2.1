@@ -31,10 +31,7 @@ def loadView():
     elif request.method == "POST" and "delete" in request.form:
         client_id = int(request.form["client_id"])
 
-        print(client_id)
-
         main.delete_values_db(client_id)
-        main.close_db()
 
         return render_template("view.html", viewData=main.show_table_db())
     elif request.method == "POST" and "modify" in request.form:
