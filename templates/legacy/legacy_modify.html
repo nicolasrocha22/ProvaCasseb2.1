@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Locadora</title>
+</head>
+<body>
+    <header>
+        <h2>Locadora</h2><hr>
+    </header>
+    <main>
+        <h3>Modificar registro</h3>
+        <form action="/view" method="POST">
+            <h5>Digite o CPF do cliente para modificar o resgistro</h5>
+            <div style="margin-bottom: 1%;">
+                <label for="client_id_m">CPF: </label>
+                <input type="number" name="client_id_m" id="client_id_m">
+            </div>
+            <h5>Filme</h5>
+            <div style="margin-bottom: 1%;">
+                <label for="movie_title_m">Titulo: </label>
+                <input type="text" name="movie_title_m" id="movie_title_m">
+            </div>
+            <div style="margin-bottom: 1%;">
+                <label for="movie_code_m">Código: </label>
+                <input type="number" name="movie_code_m" id="movie_code_m">
+            </div>
+            <h5>Cliente</h5>
+            <div style="margin-bottom: 1%;">
+                <label for="client_name_m">Nome: </label>
+                <input type="text" name="client_name_m" id="client_name_m">
+            </div>
+            <div>
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    </main>
+</body>
+</html>

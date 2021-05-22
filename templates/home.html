@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/icon.svg') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+    <title>Locadora</title>
+</head>
+<body>
+    <header>
+        <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <span class="navbar-brand mb-0 h1">Locadora</span>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                        <a class="nav-link active" href="/">Início</a>
+                        <a class="nav-link" href="/insert">Alugar</a>
+                        <a class="nav-link" href="/modify">Modificar</a>
+                        <a class="nav-link" href="/delete">Apagar</a>
+                    </div>
+                </div>
+                <button class="btn btn-outline-danger" type="button" data-bs-toggle="offcanvas" data-bs-target="#credits">Créditos</button>
+                <div class="offcanvas offcanvas-top bg-dark text-light" id="credits">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title">Créditos</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <p><strong>Equipe: </strong>Nícolas Rocha, Paula Martins, Thiago Augusto;</p>
+                        <p><strong>Orientador: </strong>Ricardo Casseb;</p>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="ps-lg-4">
+            <h3 class="title">Pagina inicial</h3>
+            <div class="container">
+                <div class="row row-cols-1 row-cols-md-3 g-4">
+                    <div class="col">
+                        <div class="card border-dark shadow">
+                            <div class="card-body">
+                                <h5>Filmes <span class="badge bg-danger">500</span></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card border-dark shadow invisible">
+                            <div class="card-body">
+                                <span>Filmes: </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card border-dark shadow">
+                            <div class="card-body">
+                                <h5>Filmes alugados <span class="badge bg-danger">50</span></h5>
+                            </div>
+                        </div>
+                    </div>
+                </div><br>
+                <div class="card border-dark shadow">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Registro</h5>
+                        <table class="table table-hover">
+                            <tr>
+                                <th class="col">Título do Filme</th>
+                                <th class="col">Código do Filme</th>
+                                <th class="col">Nome do Cliente</th>
+                                <th class="col">CPF do Cliente</th>
+                            </tr>
+                            {% for row in viewData %}
+                            <tr>
+                                <th>{{row.0}}</th>
+                                <th>{{row.1}}</th>
+                                <th>{{row.2}}</th>
+                                <th>{{row.3}}</th>
+                            </tr>
+                            {% endfor %}
+                        </table><br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="{{url_for('static', filename='bootstrap/js/bootstrap.bundle.js')}}"></script>
+</body>
+</html>

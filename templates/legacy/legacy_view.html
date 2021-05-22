@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+    <title>Locadora</title>
+</head>
+<body>
+    {{viewWarning}}
+    <table>
+        <tr>
+            <th>Título do Filme</th>
+            <th>Código do Filme</th>
+            <th>Nome do Cliente</th>
+            <th>CPF do Cliente</th>
+        </tr>
+        {% for row in viewData %}
+        <tr>
+            <th>{{row.0}}</th>
+            <th>{{row.1}}</th>
+            <th>{{row.2}}</th>
+            <th>{{row.3}}</th>
+        </tr>
+        {% endfor %}
+    </table><br>
+</body>
+</html>
