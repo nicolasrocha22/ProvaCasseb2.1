@@ -45,7 +45,7 @@ class Database:
     def add_values_db(self, mt, mc, cn, ci):
         """Adds values ​​to the "registry" table in the database"""
         command = """INSERT INTO registry(movie_title, movie_code, client_name, client_id)
-        VALUES (%s, %s, %s, %s)"""
+        VALUES (%s, %s, %s, %s);"""
 
         val = (mt, mc, cn, ci)
 
@@ -58,11 +58,11 @@ class Database:
     def modify_values_db(self, mt, mc, ci):
         """Modifys the values ​​of the "registry" table in the database"""
         try:
-            command = "UPDATE registry SET movie_title = %s WHERE client_id = %s"
+            command = "UPDATE registry SET movie_title = %s WHERE client_id = %s;"
             val = (mt, ci)
             cursor.execute(command, val)
 
-            command = "UPDATE registry SET movie_code = %s WHERE client_id = %s"
+            command = "UPDATE registry SET movie_code = %s WHERE client_id = %s;"
             val = (mc, ci)
             cursor.execute(command, val)
 
@@ -73,7 +73,7 @@ class Database:
     def delete_values_db(self, ci):
         """Deletes values from the "registry" table in the database"""
         try:
-            command = "DELETE FROM registry WHERE client_id = %s"
+            command = "DELETE FROM registry WHERE client_id = %s;"
             val = ci
 
             cursor.execute(command, val)
@@ -85,7 +85,7 @@ class Database:
         """Deletes the "registry" table from the database
         WARNING: This function should only be used in tests"""
         try:
-            command = "DROP TABLE IF EXISTS registry"
+            command = "DROP TABLE IF EXISTS registry;"
             cursor.execute(command)
             database.commit()
         except:
@@ -93,7 +93,7 @@ class Database:
 
     def show_table_db(self):
         """Shows values of the "registry" table from the database"""
-        command = "SELECT * FROM registry"
+        command = "SELECT * FROM registry;"
 
         try:
             cursor.execute(command)
