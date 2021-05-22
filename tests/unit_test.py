@@ -5,7 +5,7 @@ sys.path.insert(1, "..")
 
 from database.database import Database
 
-class TestSystem(unittest.TestCase):
+class TestLocadoraDatabase(unittest.TestCase):
     def setUp(self):
         self.db = Database()
         self.db.connect_db()
