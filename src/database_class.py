@@ -1,11 +1,11 @@
 import sys
 import pymysql
-import database.db_runner as runner
+import database_runner as runner
+
 
 class Database:
     def connect_db(self):
         login = runner.DBRunner()
-
         host = login.get_host()
         user = login.get_user()
         password = login.get_password()
@@ -29,14 +29,14 @@ class Database:
 
     def create_table_db(self):
         """Creates a new table in the database called "registry" if it doesn't exist"""
-        command = """CREATE TABLE IF NOT EXISTS registry (
-            movie_title VARCHAR(50),
-            movie_code INT,
-            client_name VARCHAR(50),
-            client_id INT NOT NULL
-        );"""
-
         try:
+            command = """CREATE TABLE IF NOT EXISTS registry (
+                movie_title VARCHAR(50),
+                movie_code INT,
+                client_name VARCHAR(50),
+                client_id INT NOT NULL
+            );"""
+
             cursor.execute(command)
             database.commit()
         except:
@@ -44,12 +44,11 @@ class Database:
 
     def add_values_db(self, mt, mc, cn, ci):
         """Adds values ​​to the "registry" table in the database"""
-        command = """INSERT INTO registry(movie_title, movie_code, client_name, client_id)
-        VALUES (%s, %s, %s, %s);"""
-
-        val = (mt, mc, cn, ci)
-
         try:
+            command = """INSERT INTO registry(movie_title, movie_code, client_name, client_id)
+            VALUES (%s, %s, %s, %s);"""
+            val = (mt, mc, cn, ci)
+
             cursor.execute(command, val)
             database.commit()
         except:
@@ -86,6 +85,7 @@ class Database:
         WARNING: This function should only be used in tests"""
         try:
             command = "DROP TABLE IF EXISTS registry;"
+
             cursor.execute(command)
             database.commit()
         except:
@@ -93,13 +93,11 @@ class Database:
 
     def show_table_db(self):
         """Shows values of the "registry" table from the database"""
-        command = "SELECT * FROM registry;"
-
         try:
-            cursor.execute(command)
-            output = cursor.fetchall()
+            command = "SELECT * FROM registry;"
 
-            return output
+            cursor.execute(command)
+            return cursor.fetchall()
         except:
             return False
 

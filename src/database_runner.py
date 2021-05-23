@@ -1,5 +1,6 @@
 import configparser
 
+
 class Runner:
     def __init__(self, user, password):
         self.user = user
@@ -15,7 +16,6 @@ class Runner:
 class DBRunner(Runner):
     login = configparser.ConfigParser()
     login.read("db.ini")
-
     host_login = login["Connection"]["Host"]
     user_login = login["Connection"]["User"]
     password_login = login["Connection"]["Password"]
@@ -23,10 +23,10 @@ class DBRunner(Runner):
 
     def __init__(
         self,
-        host = host_login,
-        user = user_login,
-        password = password_login,
-        database = database_login
+        host=host_login,
+        user=user_login,
+        password=password_login,
+        database=database_login,
     ):
         super().__init__(user, password)
         self.host = host
