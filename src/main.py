@@ -1,9 +1,9 @@
 from flask import Flask, request
 from flask.templating import render_template
-import database_class as db
+from database_class import Database
 
 app = Flask(__name__)
-main = db.Database()
+main = Database()
 main.connect_db()
 
 
